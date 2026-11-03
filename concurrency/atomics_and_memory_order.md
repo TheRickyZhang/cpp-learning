@@ -33,6 +33,9 @@ There are three "main" levels:
 - *Sequential Consistency*: ensures all threads agree on the ordering indicated by seq_cst operations.
 Generally, this is not needed in most structures, ie local implementations. But global implementations may need it for syncing: for instance, see the Dekker pattern
 
+Ordering constrains both the compiler (build-time reorder) and the CPU (run-time reorder); a barrier instruction is emitted where needed.
+- x86 (TSO): acquire/release are free, only seq_cst stores cost a fence
+- ARM: weaker model, more fences in software, so be precise with orderings
 
 # Atomic Properties
 - Are not copy / move constructible because if you think about it for two seconds, it would be ambiguous what memory order it should be in.

@@ -14,7 +14,15 @@ Shared across processes:
 - Physical memory
 - Can use shared memory and sockets to communicate
 
-Cost of context switch between on the same vs different processes
-(note context switches is always between threads)
-- Since TLB only valid in one address space, need to flush everything (but with PCID optimization, still pay eviction cost)
-- Cache is tagged with physical memory, so we only pay the cost of new entries pushing old ones out with limited size (ping pong penalty)
+# Context switch (always between threads)
+Saved/restored: registers, stack + instruction pointer, pointer to task_struct / page table (pointer swap, not copy).
+Indirect costs, largest first:
+- Cache warmth: tagged by physical address so no flush, but the new working set evicts the old (ping pong penalty)
+- TLB: only valid in one address space, so a cross-process switch flushes it (PCID keeps entries but still pays eviction)
+- Branch predictor state
+
+# fork() / exec()
+- fork() creates a process (NOT a thread): new address space, copy-on-write, so a page is copied only on the child's first write fault
+- Only the calling thread exists in the child
+- Usually followed by exec() to replace the image: a shell runs `ls` by fork() then exec("/usr/bin/ls")
+- Libraries use fork(); avoid it directly in user code

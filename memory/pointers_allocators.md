@@ -41,6 +41,8 @@ destroy_at(a+i)                ->  AT::destroy(alloc, a+i);
 To create a custom allocator class, without traits, only need to implement constructor / copy constructor, destructor, allocate() and deallocate();
 Use std::align for alignment. Has fairly tricky signature!
 
+Pool vs arena: pool = fixed-size blocks with a free list (freelist.cpp); arena = bump pointer, free everything at once (arena.cpp).
+
 ## Placement new
 Plain `new T(...)` allocates + constructs (usual form); placement new `new (ptr) T(...)` only constructs at existing memory.
 

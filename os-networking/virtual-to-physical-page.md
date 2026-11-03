@@ -13,9 +13,15 @@ Note, after a page fault, the instruction is re-executed, which updates the TLB
 
 
 General shape: TLB vs Page Table vs retrieve from memory
+Dereference path: virtual address -> TLB -> page table walk -> physical page -> cache hierarchy
 - TLB miss != page fault. TLB miss is cheap, since just hardware involved in walking page table.
 - Page fault will trap to kernel: possibilities are allocating a frame, reading
-- Not in page table = page fault.
+- Not in page table = page FAULT.
+
+Page FAULT {
+  - Find data in page cache (subset of RAM)
+  - Otherwise, fall back to disk
+}
 
 To improve efficiency (noting that internal structure is trie):
 - Huge pages (decrease a level, add more nodes at bottom)

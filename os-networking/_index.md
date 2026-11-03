@@ -1,3 +1,26 @@
+# OS / networking index
+| # | Topic | Covers | File |
+|---|---|---|---|
+| 1 | Processes & threads | process vs thread, address spaces, fork, exec, context switch | processes-and-threads.md |
+| 2 | Virtual memory | translation, page tables, TLB, page faults, demand paging, COW, huge pages | virtual-to-physical-page.md |
+| 3 | Syscalls / kernel boundary | user vs kernel mode, syscall vs interrupt vs exception, vDSO | kernel-vs-user-mode.md |
+| 4 | Scheduling | thread states, blocking cost, affinity, isolcpus, nice / SCHED_FIFO | threads-and-scheduling.md |
+| 5 | Concurrency (OS view) | futex path, contention cost, wakeups, deadlock | futex-and-wakeups.md (C++ API: ../concurrency/) |
+| 6 | Files & I/O | fds, page table vs page cache, read vs mmap, O_DIRECT, fsync | files-and-io.md |
+| 7 | I/O waiting | blocking/nonblocking, poll/epoll, level vs edge | files-and-io.md (socket section) |
+| 8 | Interrupts & devices | IRQs, softirqs, DMA, PCIe, interrupt affinity | GAP (DMA only: ../performance-engineering/kernel-bypass.md) |
+| 9 | IPC & signals | pipes, shared memory, signals, unix sockets | signals-and-ipc.md |
+| 10 | Filesystems / storage | inode, dentry, path lookup, journaling | filesystem.md |
+| 11 | Performance | cache locality, false sharing, NUMA, context-switch cost | ../performance-engineering/ |
+| + | Timekeeping | vDSO, rdtsc pitfalls | timestamping.md |
+| + | Linking / loading | compilation pipeline, ELF, what happens on ./a.out | compilation-and-linking.md |
+| + | Userspace allocation | glibc arenas, brk vs mmap, why preallocate | ../memory/malloc-free.md |
+| + | Real-time scheduling | SCHED_FIFO, isolcpus, nohz_full; priority inversion is a GAP | threads-and-scheduling.md |
+| N | Networking | sockets, TCP vs UDP, multicast, kernel bypass | networking-summary.md, sockets.md, tcp-udp.md, ../performance-engineering/kernel-bypass.md |
+
+Rule: OS mechanism lives here. Measurement and optimization technique lives in performance-engineering/. C++ API lives in concurrency/ and memory/.
+
+# Mock interview prompt and gap analysis
 Act as a mock interviewer for a low-latency C++ quantitative developer role. Interview me the way a real interviewer would: one question at a time, follow-ups based on my answers, no hints unless I'm clearly stuck.
 
 Emphasis: operating systems and networking fundamentals, with C++ and systems design as needed. Start with fundamentals and go deeper only once I've demonstrated them. I will provide the topics.
