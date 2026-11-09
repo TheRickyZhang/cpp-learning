@@ -1,4 +1,4 @@
-Design a Spreadsheet
+Design a computation graph (spreadsheet)
 - You are building backend of a spreadsheet with cells like A1, B3
 - setCell stores something in a cell, which can include references to other cells
 - getCell evaluates the cell
@@ -7,7 +7,6 @@ Another framing:
 Design a Computation Graph
 
 Make sure not to go through the observations too fast!
-
 
 
 ## Initial clarifications:
